@@ -1,10 +1,10 @@
 import CartItems from "./CartItems";
 
-const Cart = () => {
+const Cart = ({ data }) => {
   return (
     <div class="cart">
       <h2>Your cart</h2>
-      <CartItems/>
+      <CartItems cartItemData={data}/>
       <a class="button-checkout">Checkout</a>
     </div>
   );

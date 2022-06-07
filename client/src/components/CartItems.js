@@ -1,9 +1,9 @@
-import data from "../lib/data.js";
 
-const CartItems = () => {
+const CartItems = ({ cartItemData }) => {
+  console.log(cartItemData);
   return (
     <table class="cart-items">
-      {data.map(product => 
+      {cartItemData.map(product => 
         <tr key={product.id}>
           <th>{product.title}</th>
           <th>{product.price}</th>
