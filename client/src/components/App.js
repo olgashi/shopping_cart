@@ -1,10 +1,24 @@
 import React from "react";
+import Header from "./Header";
+import ProductList from "./ProductList";
+import Cart from "./Cart";
+import AddProductForm from "./AddProductForm";
 
 const App = () => {
   return (
-    <div id="app">
-      <h1>Welcome</h1>
-    </div>
+    <body>
+      <div id="app">
+        <header>
+          <Header/>
+          <Cart/>
+        </header>
+      
+        <main>
+           <ProductList/>
+           <AddProductForm/>
+        </main>
+      </div>
+    </body>
   );
 };
 
