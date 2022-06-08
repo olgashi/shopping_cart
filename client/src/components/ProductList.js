@@ -1,14 +1,13 @@
 import Product from "./Product";
 
-const ProductList = ({ data }) => {
+const ProductList = ({ data, onDeleteProduct, onUpdateProduct}) => {
+
 
   return (
-    <div class="product-listing">
-      {data.map(product =>
-        <div class="product" key={product.id}>
-          <Product productItemData={product}/>
-        </div>
-      )}
+    <div className="product-listing">
+        {data.map(product => { 
+          return <Product key={product._id} {...product} productData={product} onDeleteProduct={onDeleteProduct} onUpdateProduct={onUpdateProduct}/>
+        })}
     </div>
   );
 };

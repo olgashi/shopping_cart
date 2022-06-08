@@ -1,11 +1,22 @@
-import CartItems from "./CartItems";
+import CartItem from "./CartItem";
 
 const Cart = ({ data }) => {
+  let total = 0;
+  for (let i = 0; i < Object.keys(data); i++) {
+    // add logic to calculate cart total
+  }
   return (
-    <div class="cart">
+    <div className="cart">
       <h2>Your cart</h2>
-      <CartItems cartItemData={data}/>
-      <a class="button-checkout">Checkout</a>
+      <div className="cart-items">     
+        {data.map(cartItem => 
+          <CartItem cartItemData={cartItem} key={cartItem.id}/>
+        )}    
+      </div>
+      <div>
+        <span className="total">Total: {total}</span>
+      </div>   
+      <a href="/" className="button-checkout">Checkout</a>
     </div>
   );
 };

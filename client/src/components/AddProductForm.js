@@ -1,12 +1,18 @@
 import { useState } from 'react';
 
-
-const AddProductForm = ( { onSubmit }) => {
+const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
   const [newProduct, setNewProduct] = useState({title: "", quantity: "", price: "" });
 
   const handleSubmit = e => {
+    console.log("clicked")
     e.preventDefault();
-    onSubmit();
+
+    const newProductObj = {};
+    newProductObj.price = parseFloat(newProduct.price, 10);
+    newProductObj.quantity = parseInt(newProduct.quantity, 10);
+    newProductObj.title = newProduct.title;
+
+    onSubmit(newProductObj, resetInputs);
   }
   
   const resetInputs = () => {
@@ -17,7 +23,7 @@ const AddProductForm = ( { onSubmit }) => {
      <div>
      <h3>Add Product</h3>
         <form action="" onSubmit={handleSubmit}>
-          <div class="input-group">
+          <div className="input-group">
             <label for="product-name">Product Name</label>
             <input 
               type="text" 
@@ -26,7 +32,8 @@ const AddProductForm = ( { onSubmit }) => {
               onChange={(e) => setNewProduct({...newProduct, title: e.target.value})}
             />
           </div>
-          <div class="input-group">
+          
+          <div className="input-group">
             <label for="product-price">Price</label>
             <input 
               type="text" 
@@ -36,7 +43,7 @@ const AddProductForm = ( { onSubmit }) => {
             />
           </div>
 
-          <div class="input-group">
+          <div className="input-group">
             <label for="product-quantity">Quantity</label>
             <input 
               type="text" 
@@ -45,13 +52,17 @@ const AddProductForm = ( { onSubmit }) => {
               onChange={(e) => setNewProduct({...newProduct, quantity: e.target.value})}
             />
           </div>
-          <div class="actions form-actions">
+          
+          <div className="actions form-actions">
+            <button 
+              className="button add"
+              type="submit"
+            >Add</button>
             <a 
-              class="button add"
-            >
-            Add
-            </a>
-            <a class="button">Cancel</a>
+              href="/#"
+              className="button"
+              onClick={() => toggleAdd((showAdd) => !showAdd)}
+              >Cancel</a>
           </div>
           </form>
        </div>
