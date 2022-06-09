@@ -4,6 +4,7 @@ const Product = ({ productData, onDeleteProduct, onUpdateProduct, onAddCartItem 
 
   const { title, price, quantity, _id } = productData;
   const [showEditForm, toggleEditForm] = useState(false);
+  const isAddToCartDisabled = quantity === 0 ? true : false;
 
   return (
     <div className="product" >
@@ -12,11 +13,13 @@ const Product = ({ productData, onDeleteProduct, onUpdateProduct, onAddCartItem 
         <p className="price">{`$${price}`}</p>
         <p className="quantity">{quantity} left in stock</p>
         <div className="actions product-actions">
-          <a 
+          <button 
             href="/#" 
-            className="button add-to-cart"
+            className={`button add-to-cart ${isAddToCartDisabled ? 'disabled' :''}`}
             onClick={() => onAddCartItem(_id)}
-          >Add to Cart</a>
+            type="button"
+            disabled={isAddToCartDisabled}
+          >Add to Cart</button>
           <a 
             href="/#"
             className="button edit"
