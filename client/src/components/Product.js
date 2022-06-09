@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EditProductForm from './EditProductForm';
-const Product = ({ productData, onDeleteProduct, onUpdateProduct }) => {
+const Product = ({ productData, onDeleteProduct, onUpdateProduct, onAddCartItem }) => {
 
   const { title, price, quantity, _id } = productData;
   const [showEditForm, toggleEditForm] = useState(false);
@@ -12,7 +12,11 @@ const Product = ({ productData, onDeleteProduct, onUpdateProduct }) => {
         <p className="price">{`$${price}`}</p>
         <p className="quantity">{quantity} left in stock</p>
         <div className="actions product-actions">
-          <a href="/#" className="button add-to-cart">Add to Cart</a>
+          <a 
+            href="/#" 
+            className="button add-to-cart"
+            onClick={() => onAddCartItem(_id)}
+          >Add to Cart</a>
           <a 
             href="/#"
             className="button edit"

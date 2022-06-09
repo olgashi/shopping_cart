@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import CartItem from "./CartItem";
 
 const Cart = ({ data }) => {
+  console.log()
   let total = 0;
   for (let i = 0; i < Object.keys(data); i++) {
     // add logic to calculate cart total
