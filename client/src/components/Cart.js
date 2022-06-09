@@ -19,7 +19,7 @@ const Cart = ({ data, onCheckout }) => {
       <td colspan="3" className="total">Total: ${total}</td>
     </tr>
       </table>
-      <a href="/#" className="button-checkout" onClick={() => onCheckout()}>Checkout</a>
+      <a href="/#" className="button checkout" onClick={() => onCheckout()}>Checkout</a>
     </div>
   );
 };
