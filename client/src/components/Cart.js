@@ -6,7 +6,7 @@ const Cart = ({ data, onCheckout }) => {
   return (
     <div className="cart">
       <h2>Your cart</h2>
-      <table class="cart-items">
+      <table className="cart-items">
         <tr>
           <th>Item</th>
           <th>Quantity</th>
@@ -16,7 +16,7 @@ const Cart = ({ data, onCheckout }) => {
           <CartItem cartItemData={cartItem} key={cartItem.id} />
         )}
         <tr>
-      <td colspan="3" class="total">Total: ${total}</td>
+      <td colspan="3" className="total">Total: ${total}</td>
     </tr>
       </table>
       <a href="/#" className="button-checkout" onClick={() => onCheckout()}>Checkout</a>
