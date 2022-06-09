@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CartItem from "./CartItem";
 
-const Cart = ({ data }) => {
+const Cart = ({ data, onCheckout }) => {
   console.log()
   let total = 0;
   for (let i = 0; i < Object.keys(data); i++) {
@@ -18,7 +18,7 @@ const Cart = ({ data }) => {
       <div>
         <span className="total">Total: {total}</span>
       </div>   
-      <a href="/" className="button-checkout">Checkout</a>
+      <a href="/#" className="button-checkout" onClick={()=> onCheckout()}>Checkout</a>
     </div>
   );
 };

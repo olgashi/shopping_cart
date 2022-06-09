@@ -19,6 +19,7 @@ const App = () => {
 
     const fetchCartItems = async () => {
       const { data } = await axios.get("/api/cart");
+      console.log(data);
       setCartItems(data);
     }
     
@@ -28,15 +29,27 @@ const App = () => {
 
   const handleAddCartItem = async (productId, callback) => {
     try {
-      if (products.filter(p => p._id === productId)[0].quantity > 0) {
-        const { data } = await axios.post("/api/add-to-cart", {
-          productId: `${productId}`
-        });
-        handleUpdateProduct(productId, data.product);
-        setCartItems(cartItems.filter(i => i._id !== productId));
-        setCartItems(cartItems.concat(data.item));
-        console.log(cartItems)
+      const { data } = await axios.post("/api/add-to-cart", {
+        productId: `${productId}`
+      });
+      // if data does not have any errors, go ahead with the rest
+      handleUpdateProduct(productId, data.product);
+      // if item is already in the cart update its quantity
+      let itemAlreadyInCart = false;
+      const updatedCart = cartItems.map(item => {
+        if (item.productId === productId) {
+          item.quantity = data.item.quantity;
+          itemAlreadyInCart = true;
+        }
+        return item;
+      })
+
+      let state = updatedCart;
+      if (!itemAlreadyInCart) {
+        state = updatedCart.concat(data.item);
       }
+
+      setCartItems(state);
 
       if (callback) {
         callback();
@@ -46,6 +59,15 @@ const App = () => {
       console.error(e);
     }
   };
+
+  const handleCompleteCheckout = async () => {
+    try {
+      await axios.post("/api/checkout");
+      setCartItems([]);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   const handleAddNewProduct = async (newProduct, callback) => {
     console.log(newProduct);
@@ -98,7 +120,7 @@ const App = () => {
     <div id="app">
       <header>
         <Header />
-        <Cart data={cartItems} />
+        <Cart data={cartItems} onCheckout={handleCompleteCheckout}/>
       </header>
 
       <main>
