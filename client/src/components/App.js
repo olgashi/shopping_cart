@@ -35,6 +35,7 @@ const App = () => {
       // if data does not have any errors, go ahead with the rest
       handleUpdateProduct(productId, data.product);
       // if item is already in the cart update its quantity
+
       let itemAlreadyInCart = false;
       const updatedCart = cartItems.map(item => {
         if (item.productId === productId) {
@@ -42,14 +43,13 @@ const App = () => {
           itemAlreadyInCart = true;
         }
         return item;
-      })
+      });
 
-      let state = updatedCart;
       if (!itemAlreadyInCart) {
-        state = updatedCart.concat(data.item);
+        updatedCart.push(data.item);
       }
 
-      setCartItems(state);
+      setCartItems(updatedCart);
 
       if (callback) {
         callback();

@@ -1,11 +1,11 @@
 
 const CartItem = ({ cartItemData }) => {
   return (
-      <div>
-        <span>{cartItemData.title}</span>
-        <span>{cartItemData.price}</span>
-        <span>{cartItemData.quantity}</span>
-      </div>
+    <tr>
+      <td>{cartItemData.title}</td>
+      <td>{cartItemData.quantity}</td>
+      <td>${(cartItemData.price).toFixed(2)}</td>
+    </tr>
   );
 };
 
