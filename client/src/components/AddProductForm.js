@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import newProductFieldsValid from '../lib/utils/newProductFieldsValid'
+import productFieldsValid from '../lib/utils/productFieldsValid'
 
 const AddProductForm = ( { onSubmit, toggleAdd }) => {
   const [newProduct, setNewProduct] = useState({title: "", quantity: "", price: "" });
@@ -7,7 +7,7 @@ const AddProductForm = ( { onSubmit, toggleAdd }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (newProductFieldsValid(newProduct)) {
+    if (productFieldsValid(newProduct)) {
       const newProductObj = {};
       newProductObj.price = parseFloat(newProduct.price, 10);
       newProductObj.quantity = parseInt(newProduct.quantity, 10);
@@ -16,7 +16,7 @@ const AddProductForm = ( { onSubmit, toggleAdd }) => {
       onSubmit(newProductObj, resetInputs, toggleAdd((showAdd) => !showAdd));
 
     } else {
-      alert("Product name, price and/or quantity cannot be empty.");
+      alert("Input fields cannot be empty!");
     }
   }
   
