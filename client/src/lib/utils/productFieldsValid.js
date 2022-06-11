@@ -1,5 +1,5 @@
-const productFieldsValid = (newProductObj) => {
-  return Object.keys(newProductObj).every(prop => String(newProductObj[prop]).length > 0 && String(newProductObj[prop]) !== 'NaN')
+const productFieldsValid = (productObj) => {
+  return Object.keys(productObj).every(prop => String(productObj[prop]).length > 0 && String(productObj[prop]) !== 'NaN')
 }
 
 export default productFieldsValid;
