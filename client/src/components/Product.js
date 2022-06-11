@@ -3,9 +3,16 @@ import EditProductForm from './EditProductForm';
 
 const Product = ({ productData, onDeleteProduct, onUpdateProduct, onAddCartItem }) => {
   const { title, price, quantity, _id } = productData;
-  const [showEditForm, setShowEditForm] = useState(false);
   const isAddToCartDisabled = quantity === 0 ? true : false;
-  const toggleEditForm = () => {setShowEditForm(!showEditForm)}
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  const toggleEditForm = (callback) => {
+    setShowEditForm(!showEditForm);
+    
+    if(callback) {
+      callback();
+    }
+  };
 
   return (
     <div className="product" >

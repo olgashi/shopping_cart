@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const EditProductForm = ({ productData, toggleEditForm, onUpdateProduct }) => {
+const EditProductForm = ({ productData, handleSetShowEditForm, onUpdateProduct }) => {
   const { title, quantity, price, _id } = productData;
   const [editProduct, setEditProduct] = useState({ title, quantity, price, _id });
 
@@ -12,13 +12,17 @@ const EditProductForm = ({ productData, toggleEditForm, onUpdateProduct }) => {
     updatedProductObj.price = parseFloat(editProduct.price, 10);
     updatedProductObj.quantity = parseInt(editProduct.quantity, 10);
     updatedProductObj.title = editProduct.title;
-
-    onUpdateProduct(editProduct._id, updatedProductObj, resetInputs);
+    onUpdateProduct(editProduct._id, updatedProductObj);
   };
   
   const resetInputs = () => {
     setEditProduct({title: "", quantity: "", price: "" });
   };
+
+  const handleCancelEditForm = (e) => {
+    e.preventDefault();
+    handleSetShowEditForm(resetInputs);
+  }
 
   return (
     <div className="product-listing">
@@ -62,8 +66,8 @@ const EditProductForm = ({ productData, toggleEditForm, onUpdateProduct }) => {
               >Update</button>
               <a 
                 href="/#"
+                onClick={handleCancelEditForm}
                 className="button" 
-                onClick={() => toggleEditForm()}
                 >Cancel</a>
           </div>
         </form>
