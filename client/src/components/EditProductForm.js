@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-const EditProductForm = ({ productData, onUpdateProduct }) => {
-  console.log(productData)
+const EditProductForm = ({ productData, toggleEditForm, onUpdateProduct }) => {
   const { title, quantity, price, _id } = productData;
   const [editProduct, setEditProduct] = useState({ title, quantity, price, _id });
 
@@ -15,11 +14,11 @@ const EditProductForm = ({ productData, onUpdateProduct }) => {
     updatedProductObj.title = editProduct.title;
 
     onUpdateProduct(editProduct._id, updatedProductObj, resetInputs);
-  }
+  };
   
   const resetInputs = () => {
-    setEditProduct({title: "", quantity: "", price: "" })
-  }
+    setEditProduct({title: "", quantity: "", price: "" });
+  };
 
   return (
     <div className="product-listing">
@@ -27,28 +26,45 @@ const EditProductForm = ({ productData, onUpdateProduct }) => {
         <h3>Edit Product</h3>
         <form action="" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label for="product-name">Product Name</label>
-            <input type="text" id="product-name" value={editProduct.title} onChange={e => setEditProduct({...editProduct, title: e.target.value})}/>
+            <label htmlFor="product-name">Product Name</label>
+            <input 
+              type="text" 
+              id="product-name" 
+              value={editProduct.title} 
+              onChange={e => setEditProduct({...editProduct, title: e.target.value})}          
+            />
           </div>
 
           <div className="input-group">
-            <label for="product-price">Price</label>
-            <input type="text" id="product-price" value={editProduct.price} onChange={e => setEditProduct({...editProduct, price: e.target.value})}/>
+            <label htmlFor="product-price">Price</label>
+            <input 
+              type="text" 
+              id="product-price" 
+              value={editProduct.price} 
+              onChange={e => setEditProduct({...editProduct, price: e.target.value})}          
+            />
           </div>
 
           <div className="input-group">
-            <label for="product-quantity">Quantity</label>
-            <input type="text" id="product-quantity" value={editProduct.quantity} onChange={e => setEditProduct({...editProduct, quantity: e.target.value})}/>
+            <label htmlFor="product-quantity">Quantity</label>
+            <input 
+              type="text" 
+              id="product-quantity" 
+              value={editProduct.quantity} 
+              onChange={e => setEditProduct({...editProduct, quantity: e.target.value})}          
+            />
           </div>
 
-          <div 
-            className="actions form-actions"
-          >
-          <button 
-              className="button edit"
-              type="submit"
-            >Update</button>
-            <a href="/#" className="button">Cancel</a>
+          <div className="actions form-actions">
+            <button 
+                className="button edit"
+                type="submit"
+              >Update</button>
+              <a 
+                href="/#"
+                className="button" 
+                onClick={() => toggleEditForm()}
+                >Cancel</a>
           </div>
         </form>
       </div>

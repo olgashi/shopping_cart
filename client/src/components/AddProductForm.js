@@ -1,18 +1,23 @@
 import { useState } from 'react';
+import newProductFieldsValid from '../lib/utils/newProductFieldsValid'
 
-const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
+const AddProductForm = ( { onSubmit, toggleAdd }) => {
   const [newProduct, setNewProduct] = useState({title: "", quantity: "", price: "" });
 
   const handleSubmit = e => {
-    console.log("clicked")
     e.preventDefault();
 
-    const newProductObj = {};
-    newProductObj.price = parseFloat(newProduct.price, 10);
-    newProductObj.quantity = parseInt(newProduct.quantity, 10);
-    newProductObj.title = newProduct.title;
+    if (newProductFieldsValid(newProduct)) {
+      const newProductObj = {};
+      newProductObj.price = parseFloat(newProduct.price, 10);
+      newProductObj.quantity = parseInt(newProduct.quantity, 10);
+      newProductObj.title = newProduct.title;
 
-    onSubmit(newProductObj, resetInputs);
+      onSubmit(newProductObj, resetInputs, toggleAdd((showAdd) => !showAdd));
+
+    } else {
+      alert("Product name, price and/or quantity cannot be empty.");
+    }
   }
   
   const resetInputs = () => {
@@ -24,7 +29,7 @@ const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
      <h3>Add Product</h3>
         <form action="" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label for="product-name">Product Name</label>
+            <label htmlFor="product-name">Product Name</label>
             <input 
               type="text" 
               id="product-name" 
@@ -34,7 +39,7 @@ const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
           </div>
           
           <div className="input-group">
-            <label for="product-price">Price</label>
+            <label htmlFor="product-price">Price</label>
             <input 
               type="text" 
               id="product-price" 
@@ -44,7 +49,7 @@ const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
           </div>
 
           <div className="input-group">
-            <label for="product-quantity">Quantity</label>
+            <label htmlFor="product-quantity">Quantity</label>
             <input 
               type="text" 
               id="product-quantity" 
@@ -55,8 +60,8 @@ const AddProductForm = ( { onSubmit, isToggled, toggleAdd }) => {
           
           <div className="actions form-actions">
             <button 
-              className="button add"
               type="submit"
+              className="button add"
             >Add</button>
             <a 
               href="/#"
