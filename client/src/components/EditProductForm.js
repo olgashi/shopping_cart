@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import productFieldsValid from '../lib/utils/productFieldsValid';
+
 
 const EditProductForm = ({ productData, handleSetShowEditForm, onUpdateProduct }) => {
   const { title, quantity, price, _id } = productData;
@@ -12,7 +14,12 @@ const EditProductForm = ({ productData, handleSetShowEditForm, onUpdateProduct }
     updatedProductObj.price = parseFloat(editProduct.price, 10);
     updatedProductObj.quantity = parseInt(editProduct.quantity, 10);
     updatedProductObj.title = editProduct.title;
-    onUpdateProduct(editProduct._id, updatedProductObj, handleSetShowEditForm);
+
+    if (productFieldsValid(updatedProductObj)) {
+      onUpdateProduct(editProduct._id, updatedProductObj, handleSetShowEditForm);
+    } else {
+      alert('Input fields cannot be empty!')
+    }
   };
   
   const resetInputs = () => {
