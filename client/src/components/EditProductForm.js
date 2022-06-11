@@ -12,7 +12,7 @@ const EditProductForm = ({ productData, handleSetShowEditForm, onUpdateProduct }
     updatedProductObj.price = parseFloat(editProduct.price, 10);
     updatedProductObj.quantity = parseInt(editProduct.quantity, 10);
     updatedProductObj.title = editProduct.title;
-    onUpdateProduct(editProduct._id, updatedProductObj);
+    onUpdateProduct(editProduct._id, updatedProductObj, handleSetShowEditForm);
   };
   
   const resetInputs = () => {
