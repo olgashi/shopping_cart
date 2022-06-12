@@ -3,8 +3,8 @@ services:
   backend:
     image: olsaj/shopping_cart_server
     ports:
-      - "127.0.0.1:5001:5001"
+      - "5001:5001"
   frontend:
     image: olsaj/shopping_cart_client
     ports:
-      - "127.0.0.1:3000:3000"
+      - "3000:3000"
